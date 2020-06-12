@@ -1,0 +1,130 @@
+BODY	{
+	margin-top:	10px;
+	margin-left:	10px;
+	margin-right:	10px;
+	margin-bottom:	10px;
+	padding-top:	0;
+	padding-left:	0;
+	padding-right:	0;
+	padding-bottom:	0;
+	border-top:	0;
+	border-left:	0;
+	border-bottom:	0;
+	border-right:	0;
+	width:	700;
+	}
+
+/* Font assignments */
+
+BODY, P, TD { font-family: Tahoma, Arial, 'Myriad Web', Syntax, sans-serif; }
+
+/* Affordances */	
+	
+BODY, P	{ 
+	color: #000000;
+	background: #000033;
+	font-size: 12px;
+	}
+
+TABLE, TR, TD	
+	{
+	color: #000000
+	background: #FFFFFF;
+	border-collapse: collapse;
+	border-spacing: 0pt;
+	border-color: black;
+	empty-cells: show;
+	font-family: "arial", san-serif;
+	font-size: 12px;
+ 	padding-left: 0.04in;
+	padding-right: 0.04in;
+	}
+
+HR	{ color: #CCCCCC; }	
+
+.line	{
+	background: #FFFFFF;
+	border-top: 1px black solid; 
+	border-right: 1px black solid; 
+	border-bottom: 1px black solid; 
+	border-left: 1px black solid;
+	}
+
+.tag	{
+	width: 20%;
+	text-align: right;
+	}
+
+.tag2	{
+	width: 50%;
+	text-align: right;
+	}
+
+.head	{
+	background: #00CCFF;
+	border-top: 1px black solid; 
+	border-right: 1px black solid; 
+	border-bottom: 1px black solid; 
+	border-left: 1px black solid;
+ 	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: left;
+	}
+
+.head1	{
+	background: #000033;
+	border-top: 1px black solid; 
+	border-right: 1px black solid; 
+	border-bottom: 1px black solid; 
+	border-left: 1px black solid;
+ 	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	}
+
+.sm	{
+	font-size: 12px;
+	}
+
+.h3	{
+	color: #CCCCCC;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 21px;	
+	}
+
+.h2	{
+	color: #CCCCCC;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 21px;	
+	}
+
+.h1	{
+	color: #CCCCCC;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 21px;
+	}
+	
+.box	{
+	border-top: 1px gray solid;
+	border-bottom: 1px gray solid;
+	border-left: 1px gray solid;
+	border-right: 1px gray solid;
+	}
+
+A:link  { 
+	COLOR: #0000FF;
+	font-size: 14px;
+	font-weight: bold;
+	}
+
+A:visited { COLOR: #FF0000 }
+
+A:hover { COLOR: #00FFFF }
+
+A:active { COLOR: #FFFFFF }

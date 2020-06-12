@@ -1,0 +1,500 @@
+<!DOCTYPE HTML PUBLIC "-//SoftQuad Software//DTD HoTMetaL PRO 6.0::19990601::extensions to HTML 4.0//EN" "hmpro6.dtd">
+<HTML> 
+  <HEAD>
+	 <LINK HREF="../styles/form1.css" TYPE="text/css" REL="stylesheet"
+	  ID="sqstylesheet">
+	 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1"> 
+	 <TITLE>HalfLifePunk.com product order form</TITLE> <SCRIPT LANGUAGE="JavaScript" TYPE="">	<!--
+  function open_popup(page) {
+		stats='toolbar=no,location=no,directories=no,status=yes,menubar=yes,'
+		stats += 'scrollbars=yes,resizable=yes,width=720,height=600'
+		newBox = window.open (page,"msgWindow",stats)
+     return false;		 
+	}
+  
+function isCreditCard(st) {
+  if (st.length > 19)
+    return (false);
+  sum = 0; mul = 1; l = st.length;
+  for (i = 0; i < l; i++) {
+    digit = st.substring(l-i-1,l-i);
+    tproduct = parseInt(digit ,10)*mul;
+    if (tproduct >= 10)
+      sum += (tproduct % 10) + 1;
+    else
+      sum += tproduct;
+    if (mul == 1)
+      mul++;
+    else
+      mul--;
+  }
+  if ((sum % 10) == 0)
+    return (true);
+  else
+    return (false);
+}
+
+var encrypt_it = true;
+
+function getCCNum(default_val) {
+ msg = 'Please enter your credit card number here. '
+  + 'It will be '
+  + ((encrypt_it) ? "encrypted using the RSA secure algorithm. " : "")
+  + ' ';
+ return prompt(msg,default_val);
+}
+
+function encode(val) {
+	var alphabet= new String('abcdefghijklmnopqrstuvwxyz');
+	var cc_num = val;
+	var cc_string = String(cc_num);
+	var pub_key1 = 3;
+	var pub_key2 = 8023;
+	var digits = new String();
+	var data = new String();
+	var count = 0;
+	for (var i=0; i < cc_string.length; i++) {
+		temp0 = cc_string.substring(i,i+1);
+		temp1 = new String(RSA_encode(temp0,pub_key1,pub_key2));
+		temp2 = temp1.length;
+		digits += temp2;
+		data += temp1;
+		count++;
+	}
+	var packet = new String();
+	packet += count+':'+digits+data;
+	packet = "e"+packet;
+	return packet;
+}
+
+
+function RSA_encode(num,pub_key1,pub_key2) {
+	C = Math.pow(num,pub_key1)%pub_key2;
+	return C;
+}
+
+
+function strip(val) {
+ val = "" + val;
+ if (!val)
+  return "";
+ var result = "";
+ for (i=0;i<val.length;i++) {
+  character = val.charAt(i);
+  if ("0123456789".indexOf(character) != -1)
+   result += character;
+ }
+ return result;
+}
+
+
+
+var last_entry = "";
+var init_entry = "";
+
+function doCCStuff(form_element) {
+ if (blur_reset) {
+  last_entry = form_element.value;
+  if (last_entry && last_entry.indexOf('e') != -1) {
+	last_entry = init_entry
+	}
+  entry = getCCNum(last_entry);
+  stripped_entry = strip(entry); 
+  while (entry && (!isCreditCard(stripped_entry))) {
+	alert('The credit card number you entered could not be '
+    + 'validated. Please check the number and try again.');
+    last_entry = entry;
+    entry = getCCNum(last_entry);
+    stripped_entry = strip(entry);
+  }
+
+  if (entry) {
+	init_entry = entry;
+   if (encrypt_it)
+    form_element.value = encode(stripped_entry);
+   else
+    form_element.value = entry;
+  }
+
+  blur_form(form_element);
+ }
+
+ return false;
+}
+
+
+
+var blur_reset = true;
+
+function blur_form(form_element) {
+ form_element.blur();
+ blur_reset = false;
+ setTimeout("blur_reset=true",2000);
+}
+
+
+function doSubmitForm() {
+	if (document.form1.firstname.value=="") {
+		alert('You must specify a first name.');
+		return false;}
+	if (document.form1.lastname.value=="") {
+		alert('You must specify a last name.');
+		return false;}
+	if (document.form1.address.value=="") {
+		alert('You must specify an address.');
+		return false;}
+	if (document.form1.city.value=="") {
+		alert('You must specify a city.');
+		return false;}	
+	if (document.form1.state.value=="") {
+		alert('You must specify a state.');
+		return false;}
+	if (document.form1.zip.value=="") {
+		alert('You must specify a zip code.');
+		return false;}
+	if (document.form1.email.value=="") {
+		alert('You must specify an email address for online ordering.');
+		return false;}
+	if (document.form1.phone.value=="") {
+		alert('You must specify a phone number for contact. \r This is for validation only and will remain private.');
+		return false;}
+	if (document.form1.cc_num.value=="") {
+		alert('You must specify a credit card number for this form to be processed.');
+		return false;}
+	if (document.form1.nameoncard.value=="") {
+		alert('You must specify the name of the credit card holder.');
+		return false;}
+	if (document.form1.expires.value=="") {
+		alert('You must specify the your credit card\'s expiration date.');
+		return false;}
+	document.form1.submit();
+	return true;
+	}
+		
+	 //--></SCRIPT> 
+  </HEAD> 
+  <BODY> 
+
+<!-- Restore this real line -->
+	
+	
+	
+	
+	 <FORM NAME="form1" ACTION="http://www.halflifepunk.com/cgi-bin/hl_order.pl"
+	 METHOD="POST">
+<!-- Comment this fake line -->
+<!--	 <FORM ACTION="" METHOD="POST"> -->
+		<TABLE CLASS="line" ALIGN="LEFT"> 
+		  <TR> 
+			 <TD CLASS="head1"> </TD> 
+		  </TR> 
+		  <TR> 
+			 <TD CLASS="head"> <B>We've made some changes to the ordering system here at Half Life Central, and converted to paypal since we're down to 
+                                              <br>
+                                              CDs only for now.  The price is still the same:  $12.00 (US) + $3.00 for up to 3 CDs which should come out to $15.00.  
+                                              <br>
+                                              THEREFORE:
+                                              <br>
+                                              All you need to do is send $15.00 via paypal to me at:    virgo.moon AT gmail DOT com (use the @ and .)   and I'll get your 
+                                              order right away and rush it off to you via USPS. 
+                                              
+</B></TD> 
+		  </TR> 
+		  <TR> 
+			 <TD> 
+				<!--<BLOCKQUOTE>&nbsp;<BR>The information that you provide here will be
+				  sent to a remote internet-accessible server, then immediately transferred
+	 to a
+				  local non-internet accessible computer for processing. Your information
+	 is not
+				  stored in a database on a server that is accessible from the internet, so
+	 it
+				  cannot be accessed by internet hacking.</BLOCKQUOTE> 
+				<BLOCKQUOTE>Your credit card number will be encrypted. Only the
+				  encrypted version of your credit card number is sent over the internet,
+	 and
+				  only the encrypted value is ever "seen" on the remote server. We do not
+	 store
+				  the unencrypted credit card number, nor the un-encryption program on the
+				  web-accessible server, so no one but the charge processing company that
+				  processes our charges, will ever see your credit card
+	 number.</BLOCKQUOTE>//-->
+				</TD> 
+		  </TR> <!--
+		  <TR> 
+			 <TD CLASS="head"> <B>Order Information</B></TD> 
+		  </TR> 
+		  <TR> 
+			 <TD> 
+				<TABLE CELLPADDING="0" CELLSPACING="0"> 
+				  <TR> 
+					 <TD WIDTH="5%">&nbsp;</TD> 
+					 <TD WIDTH="20%">&nbsp;</TD> 
+					 <TD WIDTH="20%">&nbsp;</TD> 
+					 <TD WIDTH="20%">&nbsp;</TD> 
+					 <TD WIDTH="20%">&nbsp;</TD> 
+				  </TR> 
+				  <TR> 
+					 <TD WIDTH="5%" ALIGN="LEFT" HEIGHT="15" COLSPAN="5"><B> Half
+						Life - All Our Yesterdays CD - $12 each + $3 shipping for up to 5
+	 CDs</B></TD> 
+				  </TR> 
+				  <TR> 
+					 <TD WIDTH="5%" ALIGN="CENTER" HEIGHT="15">&nbsp;</TD> 
+					 <TD WIDTH="20%" ALIGN="LEFT">Quantity:&nbsp;<INPUT TYPE="text" SIZE="1"
+	 NAME="qty_CD1"></TD> 
+					 <TD WIDTH="20%">&nbsp;</TD> 
+					 <TD WIDTH="20%">&nbsp;</TD> 
+					 <TD WIDTH="20%">&nbsp;</TD> 
+				  </TR> 
+				  <TR> 
+					 <TD WIDTH="5%" ALIGN="LEFT" HEIGHT="15" COLSPAN="5"><HR></TD> 
+				  </TR> 
+				  <TR> 
+					 <TD WIDTH="5%" ALIGN="LEFT" HEIGHT="15" COLSPAN="5"><B>Half
+						Life - 8 Swords T-shirt - Red Ink on Black Cotton T - $12 each + $3
+	 shipping
+						</B></TD> 
+				  </TR> 
+				  <TR> 
+					 <TD WIDTH="5%" ALIGN="CENTER" HEIGHT="15">&nbsp;</TD> 
+					 
+					 <TD WIDTH="20%">Quantity:&nbsp;<INPUT TYPE="text" SIZE="1"
+	 NAME="qty_TS_swords_L">&nbsp;Size:&nbsp;L</TD> 
+					 <TD WIDTH="20%">Quantity:&nbsp;<INPUT TYPE="text" SIZE="1"
+	 NAME="qty_TS_swords_Mgirl">&nbsp;Size:&nbsp;M girl</TD> 
+					 <TD WIDTH="20%">Quantity:&nbsp;<INPUT TYPE="text" SIZE="1"
+	 NAME="qty_TS_swords_Lgirl">&nbsp;Size:&nbsp;L girl</TD> 
+				  </TR> 
+				  <TR> 
+					 <TD WIDTH="5%" ALIGN="LEFT" HEIGHT="15" COLSPAN="5"><HR></TD> 
+				  </TR> 
+				  <TR> 
+					 <TD WIDTH="5%" ALIGN="LEFT" HEIGHT="15" COLSPAN="5"><B>Half
+						Life - Night of the Living Dead Girl T-shirt - Glow-in-the-Dark Ink on
+	 Black
+						Cotton T - $12 each + $3 shipping </B></TD> 
+				  </TR> 
+				  <TR> 
+					 <TD WIDTH="5%" ALIGN="CENTER" HEIGHT="15">&nbsp;</TD> 
+					 <TD WIDTH="20%" ALIGN="LEFT">Quantity:&nbsp;<INPUT TYPE="text" SIZE="1"
+	 NAME="qty_TS_dead_S">&nbsp;Size:&nbsp;S</TD> 
+					 <TD WIDTH="20%"></TD> 
+					 <TD WIDTH="20%"></TD> 
+					 <TD WIDTH="20%"></TD> 
+				  </TR> 
+				  <TR> 
+					 <TD WIDTH="5%" ALIGN="LEFT" HEIGHT="15" COLSPAN="5"><HR></TD> 
+				  </TR> 
+				  <TR> 
+					 <TD WIDTH="5%" ALIGN="LEFT" HEIGHT="15" COLSPAN="5"><B>Half
+						Life - Vyvyan (Young Ones) T-shirt - White Ink on Black Cotton T - $12
+	 each +
+						$3 shipping </B></TD> 
+				  </TR> 
+				  <TR> 
+					 <TD WIDTH="5%" ALIGN="CENTER" HEIGHT="15">&nbsp;</TD> 
+					 <TD WIDTH="20%" ALIGN="LEFT"></TD> 
+					 <TD WIDTH="20%"></TD> 
+					 <TD WIDTH="20%">Quantity:&nbsp;<INPUT TYPE="text" SIZE="1"
+	 NAME="qty_TS_vyvyan_L">&nbsp;Size:&nbsp;L</TD> 
+					 <TD WIDTH="20%">Quantity:&nbsp;<INPUT TYPE="text" SIZE="1"
+	 NAME="qty_TS_vyvyan_XL">&nbsp;Size:&nbsp;XL</TD> 
+				  </TR> 
+				  <TR> 
+					 <TD WIDTH="5%" ALIGN="LEFT" HEIGHT="15" COLSPAN="5"><HR></TD> 
+				  </TR> 
+				  <TR> 
+					 <TD WIDTH="5%" ALIGN="LEFT" HEIGHT="15" COLSPAN="5"></TD> 
+				  </TR> 
+				  <TR> 
+					 <TD WIDTH="5%" ALIGN="CENTER" HEIGHT="15"></TD> 
+					 <TD WIDTH="20%" ALIGN="LEFT" COLSPAN="2"></TD> 
+					 <TD WIDTH="20%"></TD> 
+					 <TD WIDTH="20%">&nbsp;</TD> 
+				  </TR> 
+				  <TR> 
+					 <TD WIDTH="5%" ALIGN="CENTER" HEIGHT="15">&nbsp;</TD> 
+					 <TD WIDTH="20%" ALIGN="LEFT">&nbsp;</TD> 
+					 <TD WIDTH="20%">&nbsp;</TD> 
+					 <TD WIDTH="20%">&nbsp;</TD> 
+					 <TD WIDTH="20%">&nbsp;</TD> 
+				  </TR> 
+				</TABLE> </TD> 
+		  </TR> 
+		  <TR> 
+			 <TD CLASS="head"><B>Payment Information</B>&nbsp;&nbsp;&nbsp;</TD> 
+		  </TR> 
+		  <TR> 
+			 <TD> 
+				<TABLE WIDTH="100%" BORDER="0" CELLPADDING="1" CELLSPACING="0"> 
+				  <TR> 
+					 <TD COLSPAN="2"> 
+						<BLOCKQUOTE>&nbsp;<BR>We accept payment by Visa, Mastercard,
+						  American Express, Optima and Blue.<BR>&nbsp;<BR>Note: Do not submit
+	 this form
+						  unless you see an encrypted number appear in the credit card number
+	 entry field
+						  after you have entered your credit card number in the special pop-up
+	 message
+						  box.<BR></BLOCKQUOTE> </TD> 
+				  </TR> 
+				  <TR> 
+					 <TD WIDTH="25%" ALIGN="RIGHT"> Name of Cardholder
+						<FONT COLOR="#FF0000">*</FONT> </TD> 
+					 <TD WIDTH="443"><INPUT TYPE="TEXT" NAME="nameoncard" SIZE="30"
+	 MAXLENGTH="30"> </TD> 
+				  </TR> 
+				  <TR> 
+					 <TD WIDTH="25%" ALIGN="RIGHT">Card Number <FONT COLOR="#FF0000">*</FONT>
+	 </TD> 
+					 <TD WIDTH="443"><INPUT TYPE="TEXT" NAME="cc_num" SIZE="25" VALUE=""
+	 ONFOCUS="return doCCStuff(this)" ONKEYPRESS="return doCCStuff(this)">
+						</TD> 
+				  </TR> 
+				  <TR> 
+					 <TD WIDTH="25%" ALIGN="RIGHT"> Expiration Date (mmyy)
+						<FONT COLOR="#FF0000">*</FONT> </TD> 
+					 <TD WIDTH="443">
+						<INPUT TYPE="TEXT" NAME="expires" SIZE="7" MAXLENGTH="7"> </TD> 
+				  </TR> 
+				  <TR> 
+					 <TD CLASS="tag">&nbsp;</TD> 
+					 <TD COLSPAN="2"></TD> 
+				  </TR> 
+				</TABLE></TD> 
+		  </TR> 
+		  <TR> 
+			 <TD CLASS="head"> <B>Billing Information</B>
+				&nbsp;&nbsp;&nbsp;<BR>Fields marked with <FONT COLOR="#FF0000">*</FONT> are
+				required. This must be the address to which your credit card bill is
+	 sent.</TD>
+			 
+		  </TR> 
+		  <TR> 
+			 <TD> 
+				<TABLE WIDTH="100%"> 
+				  <TR> 
+					 <TD CLASS="tag">&nbsp;</TD> 
+					 <TD COLSPAN="2"></TD> 
+				  </TR> 
+				  <TR> 
+					 <TD CLASS="tag">Last Name <FONT COLOR="#FF0000">*</FONT> </TD> 
+					 <TD COLSPAN="2"><INPUT TYPE="text" SIZE="30" NAME="lastname">
+						</TD> 
+				  </TR> 
+				  <TR> 
+					 <TD CLASS="tag">First Name <FONT COLOR="#FF0000">*</FONT> </TD>
+					 
+					 <TD COLSPAN="2"><INPUT TYPE="text" SIZE="30" NAME="firstname">
+						</TD> 
+				  </TR> 
+				  <TR> 
+					 <TD CLASS="tag">MI <FONT COLOR="#FFFFFF">*</FONT> </TD> 
+					 <TD COLSPAN="2"><INPUT TYPE="text" SIZE="5" NAME="mi"></TD> 
+				  </TR> 
+				  <TR> 
+					 <TD CLASS="tag">Address <FONT COLOR="#FF0000">*</FONT> </TD> 
+					 <TD COLSPAN="2"><INPUT TYPE="text" SIZE="50" NAME="address">
+						</TD> 
+				  </TR> 
+				  <TR> 
+					 <TD CLASS="tag">City <FONT COLOR="#FF0000">*</FONT> </TD> 
+					 <TD COLSPAN="2"><INPUT TYPE="text" SIZE="30" NAME="city"> </TD>
+					 
+				  </TR> 
+				  <TR> 
+					 <TD CLASS="tag">State <FONT COLOR="#FF0000">*</FONT> </TD> 
+					 <TD COLSPAN="2"><INPUT TYPE="text" SIZE="20" NAME="state">
+						</TD> 
+				  </TR> 
+				  <TR> 
+					 <TD CLASS="tag">ZIP/Postal Code <FONT COLOR="#FF0000">*</FONT>
+						</TD> 
+					 <TD COLSPAN="2"><INPUT TYPE="text" SIZE="11" NAME="zip"> </TD> 
+				  </TR> 
+				  <TR> 
+					 <TD CLASS="tag">Country <FONT COLOR="#FF0000">*</FONT> </TD> 
+					 <TD COLSPAN="2"><INPUT TYPE="text" SIZE="30" NAME="country">
+						</TD> 
+				  </TR> 
+				  <TR> 
+					 <TD CLASS="tag">Phone <FONT COLOR="#FF0000">*</FONT> </TD> 
+					 <TD COLSPAN="2"><INPUT TYPE="text" SIZE="15" NAME="phone">
+						</TD> 
+				  </TR> 
+				  <TR> 
+					 <TD CLASS="tag">E-Mail <FONT COLOR="#FF0000">*</FONT> </TD> 
+					 <TD COLSPAN="2"><INPUT TYPE="text" SIZE="50" NAME="email">
+						</TD> 
+				  </TR> 
+				  <TR> 
+					 <TD CLASS="tag">&nbsp;</TD> 
+					 <TD COLSPAN="2"></TD> 
+				  </TR> 
+				</TABLE> </TD> 
+		  </TR> 
+		  <TR> 
+			 <TD CLASS="head"><B>Shipping Information</B>
+				&nbsp;&nbsp;&nbsp;<BR>This is the address to which we will ship your
+				order.&nbsp;&nbsp;All orders will be shipped by First Class US Mail. You
+	 should
+				receive your order in two weeks or less.</TD> 
+		  </TR> 
+		  <TR> 
+			 <TD> 
+				<TABLE WIDTH="100%"> 
+				  <TR> 
+					 <TD COLSPAN="2">&nbsp;</TD> 
+				  </TR> 
+				  <TR> 
+					 <TD WIDTH="20%" ALIGN="RIGHT"><INPUT TYPE="CHECKBOX"
+	 NAME="check_same_addr">&nbsp;</TD> 
+					 <TD WIDTH="80%">Check here if shipping address is same as
+						billing address entered above, otherwise, complete the following:</TD> 
+				  </TR> 
+				  <TR> 
+					 <TD WIDTH="20%" ALIGN="RIGHT">Name </TD> 
+					 <TD WIDTH="80%"><INPUT TYPE="text" SIZE="30" NAME="s_name"></TD> 
+				  </TR> 
+				  <TR> 
+					 <TD WIDTH="20%" ALIGN="RIGHT">Address </TD> 
+					 <TD WIDTH="80%"><INPUT TYPE="text" SIZE="50" NAME="s_address"></TD> 
+				  </TR> 
+				  <TR> 
+					 <TD WIDTH="20%" ALIGN="RIGHT">City </TD> 
+					 <TD WIDTH="80%"><INPUT TYPE="text" SIZE="30" NAME="s_city"></TD> 
+				  </TR> 
+				  <TR> 
+					 <TD WIDTH="20%" ALIGN="RIGHT">State </TD> 
+					 <TD WIDTH="80%"><INPUT TYPE="text" SIZE="20" NAME="s_state"></TD> 
+				  </TR> 
+				  <TR> 
+					 <TD WIDTH="20%" ALIGN="RIGHT">ZIP/Postal Code </TD> 
+					 <TD WIDTH="80%"><INPUT TYPE="text" SIZE="11" NAME="s_zip"></TD>
+					 
+				  </TR> 
+				  <TR> 
+					 <TD WIDTH="20%" ALIGN="RIGHT">Country </TD> 
+					 <TD WIDTH="80%"><INPUT TYPE="text" SIZE="30" NAME="s_country"></TD> 
+				  </TR> 
+				  <TR> 
+					 <TD CLASS="tag">&nbsp;</TD> 
+					 <TD COLSPAN="2"></TD> 
+				  </TR> 
+				</TABLE> </TD> 
+		  </TR> 
+		  <TR> 
+			 <TD> 
+				<CENTER>
+				  <INPUT TYPE="button" VALUE="Submit" ONCLICK="doSubmitForm();">
+				  <INPUT TYPE="reset" VALUE="Reset Form"></CENTER> </TD> 
+		  </TR> 
+		  <TR> 
+			 <TD>&nbsp;</TD> 
+		  </TR> //-->
+		</TABLE> </FORM> 
+
+
+
+</BODY></HTML>

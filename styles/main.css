@@ -1,0 +1,152 @@
+BODY	{
+	margin-top:	0;
+	margin-left:	0;
+	margin-right:	0;
+	margin-bottom:	0;
+	padding-top:	0;
+	padding-left:	0;
+	padding-right:	0;
+	padding-bottom:	0;
+	border-top:	0;
+	border-left:	0;
+	border-bottom:	0;
+	border-right:	0;
+	width:	800px;
+	}
+
+/* Font assignments */
+
+body, p, td { font-family: Tahoma, Arial, 'Myriad Web', Syntax, sans-serif; }
+
+h1, h2, h3, h4, h5, h6, th, dt { font-family: Tahoma, Arial 'Myriad Web', Syntax, sans-serif; }
+
+/* Affordances */	
+	
+BODY	{ color: #CCCCCC; background: #000000; width: 800px}
+		
+H1, H2, H3, H4, H5, H6, { color: #CCCCCC; }	
+		
+HR	{ color: #CCCCCC; }		
+
+P	{ 
+	color: #CCCCCC; 
+	background: none;
+	font-size: 14px;
+	}
+		
+TABLE, TR, TD	{	
+	color: #CCCCCC;
+	border-style: none;
+	border-collapse: collapse;
+	border-spacing: 0pt;
+	empty-cells: show;
+	font-size: 14px;
+	margin-top:	0;
+	margin-left:	0;
+	margin-right:	0;
+	margin-bottom:	0;
+	padding-top:	0;
+	padding-left:	0;
+	padding-right:	0;
+	padding-bottom:	0;
+	border-top:	0;
+	border-left:	0;
+	border-bottom:	0;
+	border-right:	0;
+	}	
+
+.nav	{
+	color: #000000;
+	font-size: 14px;
+	font-weight: bold;
+	}
+
+.sel	{
+	text-align: center;
+	padding-left: 7px;
+	padding-right:7px;
+	font-size: 14px; 
+	font-weight: bold; 
+	color: #FFFFFF;
+	background: #000000;
+	}
+
+.sm	{
+	font-size: 10px;
+	}
+
+.h4	{
+	color: #CCCCCC;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 18px;	
+	}
+
+.h3	{
+	color: #CCCCCC;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 21px;	
+	}
+
+.h2	{
+	color: #CCCCCC;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 21px;	
+	}
+
+.h2r	{
+	color: #FF0000;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 21px;	
+	}
+
+
+.h1	{
+	color: #CCCCCC;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 21px;
+	}
+	
+.box	{
+	border-top: 1px gray solid;
+	border-bottom: 1px gray solid;
+	border-left: 1px gray solid;
+	border-right: 1px gray solid;
+	padding-top:	5px;
+	padding-left:	5px;
+	padding-right:	5px;
+	padding-bottom:	5px;
+	}
+
+
+A:link  { 
+	COLOR: #3399FF;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 14px;
+	}
+
+A:visited  { 
+	COLOR: #3399FF;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 14px;
+	}
+
+A:hover { 
+	COLOR: #00CCFF; 
+	font-size: 15px;
+	font-weight: bold;
+	line-height: 14px;
+	}
+
+A:active { 
+	COLOR: #00FFFF; 
+	font-size: 15px;
+	font-weight: bold;
+	line-height: 14px;
+	}
